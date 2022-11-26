@@ -11,28 +11,86 @@
   </head>
 
 <body>
-  <header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-      <nav class='nav navbar-nav navbar-left' >
-        <div class="b">Bookers2</div>
-      </nav>
-      <nav>
-        <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-            <li><%= link_to "Home", user_path(current_user.id),class:"glyphicon glyphicon-home" %></a></li>
-            <li><%= link_to "Users", "/users",class:"glyphicon glyphicon-user" %></a></li>
-            <li><%= link_to "Books", "/books",class:"glyphicon glyphicon-book" %></a></li>
-            <li><%= link_to "log out", destroy_user_session_path,class:" glyphicon  glyphicon-log-out",method: :delete %></li>
+  <header>
+      <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <span>Bookers</span>
+          </a>
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
 
-          <% else %>
-            <li><%= link_to"Home",root_path,  class:"glyphicon glyphicon-home" %></li>
-            <li><%= link_to"About",home_about_path,class:"glyphicon glyphicon-link" %></li>
-            <li><%= link_to"Sign up", "/users/sign_up",class:"glyphicon glyphicon-edit sign_up" %></li>
-            <li><%= link_to"login", "/users/sign_in",  class:"glyphicon glyphicon-log-in" %></li>
-          <% end %>
-        </<ul>
+              <!--ログインしているとき-->
+              <% if user_signed_in? %>
+
+                <!--Homeのアイコンとリンクの部分-->
+                <li>
+                  <%= link_to user_path(current_user.id),class:"nav-link text-light" do %>
+                    <i class="fas fa-home"></i> Home
+                  <% end %>
+                </li>
+
+                <!--Usersのアイコンとリンクの部分-->
+                <li>
+                  <%= link_to "/users",class:"nav-link text-light" do %>
+                    <i class="fas fa-users"></i> Users
+                  <% end %>
+                </li>
+
+                <!--Booksのアイコンとリンクの部分-->
+                <li>
+                  <%= link_to "/books",class:"nav-link text-light" do %>
+                    <i class="fas fa-book-open"></i> Books
+                  <% end %>
+                </li>
+
+                <!--Log outのアイコンとリンクの部分-->
+                <li>
+                  <%= link_to destroy_user_session_path,class:"nav-link text-light",method: :delete do %>
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                  <% end %>
+                </li>
+
+
+
+              <!--ログインしていないとき-->
+              <% else %>
+
+                <!--Home部分のアイコンとリンク-->
+                <li>
+                  <%= link_to root_path,  class:"nav-link text-light" do %>
+                    <i class="fas fa-home"></i> Home
+                  <% end %>
+                </li>
+
+                <!--About部分のアイコンとリンク-->
+                <li>
+                  <%= link_to home_about_path,class:"nav-link text-light" do %>
+                    <i class="fas fa-link"></i> About
+                  <% end %>
+                </li>
+
+                <!--Sing up部分のアイコンとリンク-->
+                <li>
+                  <%= link_to "/users/sign_up",class:"nav-link text-light" do %>
+                    <i class="fas fa-user-plus"></i> Sign up
+                  <% end %>
+                </li>
+
+                <!--Log in部分のアイコンとリンク-->
+                <li>
+                  <%= link_to "/users/sign_in",  class:"nav-link text-light" do %>
+                    <i class="fas fa-sign-in-alt"></i> Log in
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       </nav>
-    </div>
   </header>
 
   <div class= "body">
@@ -48,13 +106,14 @@
 
 
   <footer>
-    <div class='container'>
-      <div class='row'>
-        <div class='col-xs-3 col-xs-offset-9'>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="mx-auto">
           <p>CopyRight Infratop.inc</p>
         </div>
       </div>
     </div>
   </footer>
+
   </body>
 </html>

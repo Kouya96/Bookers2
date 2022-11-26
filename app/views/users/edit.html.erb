@@ -1,3 +1,9 @@
+<% if @user.id == current_user.id %>
+        <%= link_to edit_user_path(current_user.id) do %>
+            <div class= " edit btn btn-outline-secondary btn-default btn-block" ><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></div>
+        <% end %>
+        <% end %>
+
 <% if @user.errors %>
         <ul>
         <% @user.errors.full_messages.each do |message| %>
@@ -6,17 +12,30 @@
         </ul>
       <% end %>
 
-<div class="box">
-<h2>User   info</h2>
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-sm-0 mx-auto">
+
+<h2>User info</h2>
 
 <%= form_for(@user, url: user_path(current_user.id)) do |f| %>
     <h4>Name</h4>
     <%= f.text_field :name %>
     <h4>Image</h4>
-  <%= f.attachment_field :profile_image %>
+
+
+  <%= f.file_field :profile_image, accept: "image/*" %>
+  <% if @user == book_path %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <% end %>
+
+
+
     <h4>introduction</h4>
       <%= f.text_area :introduction %>
-    <%= f.submit 'Update User' %>
+    <p><%= f.submit 'Update User' %></p>
 <% end %>
 
+  </div>
+</div>
 </div>
